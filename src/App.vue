@@ -29,6 +29,7 @@
         methods: {
             handleConnectivityChange(status) {
                 this.isOnline = status;
+                window.isOnline = status;
             }
         },
         mounted() {
