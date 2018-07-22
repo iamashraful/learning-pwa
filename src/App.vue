@@ -1,5 +1,9 @@
 <template>
     <div id="app">
+        <offline @detected-condition="handleConnectivityChange"/>
+        <div v-if="!isOnline">
+            <p class="top-alert"><strong>Offline</strong> detected. Please don't reload your window.</p>
+        </div>
         <div id="nav">
             <router-link to="/">Home</router-link>
             |
@@ -8,6 +12,30 @@
         <router-view/>
     </div>
 </template>
+
+<script>
+    import offline from 'v-offline';
+
+    export default {
+        name: "App",
+        data() {
+            return {
+                isOnline: true,
+            }
+        },
+        components: {
+            offline
+        },
+        methods: {
+            handleConnectivityChange(status) {
+                this.isOnline = status;
+            }
+        },
+        mounted() {
+
+        }
+    }
+</script>
 
 <style>
     #app {
@@ -29,5 +57,10 @@
 
     #nav a.router-link-exact-active {
         color: #42b983;
+    }
+    .top-alert {
+        background-color: #f7d438;
+        padding: 10px;
+        margin-top: 0;
     }
 </style>
